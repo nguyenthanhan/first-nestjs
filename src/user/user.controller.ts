@@ -34,11 +34,6 @@ export class UserController {
     return this.userService.getUserById(id);
   }
 
-  @Post()
-  createUser(@Body() body: CreateUserDto) {
-    return this.userService.createUser(body);
-  }
-
   @Put(':id')
   updateUser(
     @Param(

@@ -60,32 +60,6 @@ export class UserService implements UserServiceInterface {
     return { data: foundUser };
   }
 
-  async createUser(body: CreateUserDto) {
-    try {
-      const payload = {
-        name: body?.name,
-        username: body?.username,
-        age: body?.age,
-        email: body?.email,
-        status: EUserStatus.ACTIVE,
-      };
-      const newUser = this.usersRepository.create(payload);
-      await this.usersRepository.save(newUser);
-    } catch (error) {
-      if (error.code === '23505') {
-        throw new ConflictException('username already exists.');
-      }
-    }
-    const createdUser = await this.usersRepository.findOne({
-      where: { username: body.username },
-      select: ['id', 'name', 'email', 'username', 'age', 'status', 'createdAt'],
-    });
-    if (!createdUser) {
-      throw new BadRequestException('User not found');
-    }
-    return { data: createdUser };
-  }
-
   async updateUser(id: number, body: UpdateUserDto) {
     console.log(
       '🚀 ~ file: user.service.ts:84 ~ UserService ~ updateUser ~ body:',

@@ -11,7 +11,6 @@ export interface UserServiceInterface {
     query: GenericQueryDto,
   ): Promise<GenericListResponseInterface<UserEntity>>;
   getUserById(id: number): Promise<IGenericResponse<UserEntity>>;
-  createUser(body: CreateUserDto): Promise<IGenericResponse<UserEntity>>;
   updateUser(
     id: number,
     body: UpdateUserDto,
